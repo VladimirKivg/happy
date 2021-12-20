@@ -1,4 +1,4 @@
-package com.example.springWebSpringDataJPA;
+package com.happy.model;
 
 import javax.persistence.*;
 

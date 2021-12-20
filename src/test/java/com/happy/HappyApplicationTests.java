@@ -1,10 +1,10 @@
-package com.example.springWebSpringDataJPA;
+package com.happy;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringWebSpringDataJpaApplicationTests {
+class HappyApplicationTests {
 
 	@Test
 	void contextLoads() {

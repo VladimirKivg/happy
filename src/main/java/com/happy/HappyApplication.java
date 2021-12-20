@@ -1,13 +1,13 @@
-package com.example.springWebSpringDataJPA;
+package com.happy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringWebSpringDataJpaApplication {
+public class HappyApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringWebSpringDataJpaApplication.class, args);
+		SpringApplication.run(HappyApplication.class, args);
 	}
 
 }
