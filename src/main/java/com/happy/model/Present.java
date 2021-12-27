@@ -4,8 +4,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity(name = "prethent")
-public class Prethent {
+@Entity(name = "present")
+public class Present {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
