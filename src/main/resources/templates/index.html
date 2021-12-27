@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<body>
+<div class="container">
+    <div th:replace="@{'views/' + ${content}} :: ${content}"></div>
+</div>
+<div lang="en" th:replace="fragments/footer :: footer"> </div>
+</body>
+
+</html>
