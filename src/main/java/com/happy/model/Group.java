@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.xml.crypto.Data;
 
 @Entity(name = "groups")
 public class Group {
@@ -12,8 +13,8 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.AUTO)
    private Integer id;
    private String place;
-   // Date date;
-   //private Float price;
+  // private Data date;
+   private Float price;
    private String room;
 
     public Group() {
@@ -41,15 +42,15 @@ public class Group {
 
     public void setDate(Date date) {
         this.date = date;
-    }*/
-
-    /*public Float getPrice() {
+    }
+*/
+    public Float getPrice() {
         return price;
     }
 
     public void setPrice(Float price) {
         this.price = price;
-    }*/
+    }
 
     public String getRoom() {
         return room;
