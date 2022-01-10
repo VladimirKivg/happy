@@ -1,3 +1,18 @@
 <div th:fragment="santa_management_page" xmlns:th="http://www.w3.org/1999/xhtml">
-    santa_management_page text here
+    <table>
+        <thead>
+        <tr>
+            <th>Назва</th>
+            <th>Кількість дітей</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="group : ${groups}">
+            <td th:text="${group.room}"></td>
+            <td th:text="${group.id}"></td>
+            <td><a th:href="@{/delete/{id}(id=${group.id})}">Видалити Групу</a></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
