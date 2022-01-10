@@ -17,9 +17,9 @@ public class GroupController {
     GroupRepository groupRepository;
 
     @GetMapping("/getGroup")
-    public String takeGroup(){
+    public Group takeGroup(){
         Group byId = groupRepository.findById(2);
-        return byId.getRoom();
+        return byId;
     }
 
 }
