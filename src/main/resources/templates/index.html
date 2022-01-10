@@ -3,10 +3,15 @@
 
 
 <body>
+
+<div lang="en" th:replace="fragments/header :: header"> </div>
+
+<main>
 <div class="container">
     <div th:replace="@{'views/' + ${content}} :: ${content}"></div>
 </div>
 <div lang="en" th:replace="fragments/footer :: footer"> </div>
+</main>
 </body>
 
 </html>
