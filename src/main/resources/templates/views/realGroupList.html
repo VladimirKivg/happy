@@ -1,0 +1,18 @@
+<div th:fragment="realGroupList" xmlns:th="http://www.w3.org/1999/xhtml">
+    <table>
+        <thead>
+        <tr>
+            <th>Назва</th>
+            <th>Кількість дітей</th>
+            <th>Видалення групи</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="group : ${groups}">
+            <td th:text="${group.name}"></td>
+            <td th:text="${group.number}"></td>
+            <td><a th:href="@{/group/delete/{id}(id=${group.id})}">Видалити Групу</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

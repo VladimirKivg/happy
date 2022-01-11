@@ -7,6 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @RestController
@@ -21,5 +27,57 @@ public class GroupController {
         Group byId = groupRepository.findById(2);
         return byId;
     }
+
+    @RequestMapping("/list")
+    public String list(ModelMap model) {
+        model.addAttribute("content", "groupList");
+        return "index";
+    }
+
+    @RequestMapping("/realList")
+    public String realList(ModelMap model) {
+
+        model.addAttribute("groups", realGroupList);
+        model.addAttribute("content", "realGroupList");
+        return "index";
+    }
+
+   /* private List<GroupStudy> getGroupList() {
+        List<GroupStudy> groupList = new ArrayList<>();
+        GroupStudy group1 = new GroupStudy();
+        group1.setName("Яслі_1 - Малятко");
+        group1.setNumber(25);
+        groupList.add(group1);
+        groupList.add(group1);
+        // add other groups
+        return groupList;
+    }*/
+
+
+    List<GroupStudy> realGroupList;
+    { realGroupList = new ArrayList<>();
+        GroupStudy group1 = new GroupStudy();
+        group1.setName("Яслі_1 - Малятко");
+        group1.setNumber(25);
+        GroupStudy group2 = new GroupStudy("gaga", 21);
+        realGroupList.add(group1);
+        realGroupList.add(new GroupStudy("gugu",12));
+        realGroupList.add(group2);
+    }
+
+
+    @RequestMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Integer id, ModelMap model) {
+        List<GroupStudy> collect = realGroupList.stream()
+                .filter((groupStudy) -> groupStudy.getId() == id).collect(Collectors.toList());
+        if (collect!=null) {
+
+            realGroupList.remove(collect.get(0));// this logic is not correct, id doesn’t depend on index
+        }// this logic now is correct :)
+        return "redirect:/group/realList";
+    }
+
+
+
 
 }
