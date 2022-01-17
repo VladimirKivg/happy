@@ -3,10 +3,11 @@
     </thead>
     <tbody>
 
+
     <tr th:each="group : ${groups}">
       <td th:text="${group.room}"></td>
       <td th:text="${group.id}"></td>
-        <td><a th:href="@{/delete/{id}(id=${group.id})}">Видалити Групу</a></td>
+        <td><a th:href="@{/delete/{id}(id=${group.id})}"> Видалити Групу</a></td>
     </tr>
     </tbody>
   </table>
