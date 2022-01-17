@@ -40,7 +40,7 @@ public class GroupController {
     }
     @RequestMapping("/list")
     public String list(ModelMap model) {
-        model.addAttribute("groups", groupList);
+        model.addAttribute("groups",  groupList);
         model.addAttribute("content", "groupList");
         return "index";
     }
