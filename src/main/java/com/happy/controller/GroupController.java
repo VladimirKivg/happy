@@ -20,7 +20,7 @@ public class GroupController {
     private static final List<Group> groupList = new ArrayList<>();
     private static final int Money = 25;
     private static final int Tabak = 28;
-/*123*/
+
     static {
         Group group1 = new Group();
         group1.setId(Money - Tabak);
