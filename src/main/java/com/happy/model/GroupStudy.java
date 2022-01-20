@@ -1,16 +1,22 @@
 package com.happy.model;
 
 public class GroupStudy {
-    private static int id;
+    private static int index;
+    private int id;
+
     private String name;
     private Integer number;
 
-    {++id;}
+     {
+        index++;
+        id=index;
+    }
 
     public GroupStudy( String name, Integer number) {
 
         this.name = name;
         this.number = number;
+
     }
 
     public GroupStudy() {
@@ -35,5 +41,13 @@ public class GroupStudy {
 
     public void setNumber(Integer number) {
         this.number = number;
+    }
+
+    @Override
+    public String toString() {
+        return "GroupStudy{" +
+                "name='" + name + '\'' +
+                ", number=" + number +
+                '}';
     }
 }

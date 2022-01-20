@@ -1,6 +1,15 @@
 <div th:fragment="realGroupList" xmlns:th="http://www.w3.org/1999/xhtml">
+    <br><br>
+    <br>
+    <div th:switch="${groups}">
+        <h2 th:case="null">No any group.</h2>
+        <div th:case="*">
+
+
+
     <table>
         <thead>
+
         <tr>
             <th>Назва</th>
             <th>Кількість дітей</th>
@@ -15,4 +24,13 @@
         </tr>
         </tbody>
     </table>
+
+            <p>
+                <a href="/group/addGroups"> Add a new group
+                </a>
+            </p>
+
+        </div>
+    </div>
+
 </div>

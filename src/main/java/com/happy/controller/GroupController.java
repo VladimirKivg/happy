@@ -6,10 +6,8 @@ import com.happy.repository.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +15,8 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static java.lang.System.out;
 
 
 @Controller
@@ -42,6 +42,14 @@ public class GroupController {
     public String realList(ModelMap model) {
 
         model.addAttribute("groups", realGroupList);
+        model.addAttribute("content", "realGroupList");
+        return "index";
+    }
+
+    @RequestMapping("/nullList")
+    public String nullList(ModelMap model) {
+
+        model.addAttribute("groups", null);
         model.addAttribute("content", "realGroupList");
         return "index";
     }
@@ -72,15 +80,43 @@ public class GroupController {
 
     @RequestMapping("/delete/{id}")
     public String delete(@PathVariable("id") Integer id, ModelMap model) {
-        List<GroupStudy> collect = realGroupList.stream()
-                .filter((groupStudy) -> groupStudy.getId() == id).collect(Collectors.toList());
-        if (collect!=null) {
+        for (GroupStudy groupStudy:realGroupList){
+            out.println(groupStudy.getId());
+        }
+        /*List<GroupStudy> collect =*/
+        int x=id;
+       realGroupList.stream().filter((groupStudy) ->  groupStudy.getId()==id).forEach(out::println);
 
-            realGroupList.remove(collect.get(0));// this logic is not correct, id doesn’t depend on index
-        }// this logic now is correct :)
+       /* if (first!=null) {
+            first.ifPresentOrElse(user2 -> out.println(user2), () -> out.println("пользователь не найден"));
+            }
+
+            realGroupList.remove(first.get());// this logic is not correct, id doesn’t depend on index
+        // this logic now is correct :)*/
         return "redirect:/group/realList";
     }
 
+
+    @RequestMapping("addGroups")
+    public String addRealGroup(GroupStudy groupStudy, ModelMap modelMap, BindingResult bindingResult) {
+        modelMap.addAttribute("group",groupStudy);
+        modelMap.addAttribute("content", "createGroup");
+        return "index";
+    }
+
+/*@PostMapping( "/addVariable") те саме що @RequestMapping(value = "/add",method = RequestMethod.POST)*/
+    @PostMapping( "/addVariable")
+    public String addVariable(GroupStudy groupStudy){
+        realGroupList.add(groupStudy);
+        return "redirect:/group/realList";
+    }
+
+
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    public String add(GroupStudy groupStudy){
+        realGroupList.add(groupStudy);
+        return "redirect:/group/realList";
+    }
 
 
 
