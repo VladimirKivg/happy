@@ -4,14 +4,16 @@
         <tr>
             <th>Назва</th>
             <th>Кількість учасників</th>
+            <th>Редагування групи</th>
             <th>Видалення групи</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="group : ${groups}">
-            <td th:text="${group.room}"></td>
+            <td th:text="${group.name}"></td>
             <td th:text="${group.id}"></td>
-            <td><a th:href="@{/delete/{id}(id=${group.id})}">Видалити Групу</a></td>
+            <td><a th:href="@{/group/delete/{id}(id=${group.id})}">Редагувати Групу</a></td>
+            <td><a th:href="@{/group/delete/{id}(id=${group.id})}">Видалити Групу</a></td>
         </tr>
         </tbody>
     </table>
