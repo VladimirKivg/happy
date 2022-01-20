@@ -4,9 +4,12 @@
 
 <body>
 
-<div lang="en" th:replace="fragments/header :: header"> </div>
+
 
 <main>
+
+    <div lang="en" th:replace="fragments/header :: header"> </div>
+
 <div class="container">
     <div th:replace="@{'views/' + ${content}} :: ${content}"></div>
 </div>

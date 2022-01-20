@@ -1,9 +1,13 @@
 package com.happy.controller;
 
 import com.happy.model.Group;
+import com.happy.model.GroupStudy;
 import com.happy.repository.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +19,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
-@RestController
+@Controller
 @RequestMapping(value = "/group")
 public class GroupController {
 
@@ -72,8 +76,17 @@ public class GroupController {
                 .filter((groupStudy) -> groupStudy.getId() == id).collect(Collectors.toList());
         if (collect!=null) {
 
-            realGroupList.remove(collect.get(0));// this logic is not correct, id doesn’t depend on index
-        }// this logic now is correct :)
+/*@PostMapping( "/addVariable") те саме що @RequestMapping(value = "/add",method = RequestMethod.POST)*/
+    @PostMapping( "/addVariable")
+    public String addVariable(GroupStudy groupStudy){
+        realGroupList.add(groupStudy);
+        return "redirect:/group/realList";
+    }
+
+
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    public String add(GroupStudy groupStudy){
+        realGroupList.add(groupStudy);
         return "redirect:/group/realList";
     }
 
