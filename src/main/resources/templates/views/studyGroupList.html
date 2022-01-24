@@ -1,0 +1,30 @@
+<div th:fragment="studyGroupList" xmlns:th="http://www.w3.org/1999/xhtml">
+    <table>
+        <thead>
+        <tr>
+            <th>Назва групи</th>
+            <th>Кількість дітей</th>
+            <th>Видалення групи</th>
+        </tr>
+        </thead>
+         <tbody>
+    <tr th:each="group : ${groups}">
+        <td th:text="${group.Name}"></td>
+        <td th:text="${group.number}"></td>
+        <td><a th:href="@{/group/delete/{id}(id=${group.id})}">Видалити Групу</a></td>
+
+        <td>
+            <a th:href="@{/group/edit/{id}(id=${group.id})}">
+                Редагувати
+            </a>
+        </td>
+
+    </tr>
+
+    </tbody>
+    </table>
+    <p>
+        <a href="/group/add-group"> Add a new group
+        </a>
+    </p>
+</div>
