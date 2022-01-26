@@ -1,6 +1,5 @@
 <div th:fragment="realGroupList" xmlns:th="http://www.w3.org/1999/xhtml">
-    <br><br>
-    <br>
+
     <div th:switch="${groups}">
         <h2 th:case="null">No any group.</h2>
         <div th:case="*">
@@ -21,7 +20,17 @@
             <td th:text="${group.name}"></td>
             <td th:text="${group.number}"></td>
             <td><a th:href="@{/group/delete/{id}(id=${group.id})}">Видалити Групу</a></td>
+
+            <td>
+                <a th:href="@{/group/edit/{id}(id=${group.id})}">
+                    Редагувати
+                </a>
+            </td>
+
         </tr>
+
+
+
         </tbody>
     </table>
 

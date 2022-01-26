@@ -5,10 +5,14 @@
           method="post">
         <br><br>
         <br><br>
+
         <label for="name">Назва групи</label>
         <input type="text" th:field="*{name}" id="name" placeholder="Назва групи">
+        <span th:if="${#fields.allErrors()}" th:errors="*{name}"></span>
+
         <label for="number">Кількість дітей</label>
         <input type="text" th:field="*{number}" id="number" placeholder="Кількість дітей">
+
         <input type="submit" value="Створити групу">
     </form>
 </div>
