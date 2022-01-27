@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +33,7 @@ groupList.add(studyGroup);
 
 
     @RequestMapping("/list")
-    public String list(ModelMap model) {
+    public String list(@org.jetbrains.annotations.NotNull ModelMap model) {
 
         model.addAttribute("groups", groupList);
         model.addAttribute("content", "studyGroupList");
@@ -66,7 +67,14 @@ groupList.add(studyGroup);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String add(StudyGroup studyGroup) {
+    public String add(@Valid StudyGroup studyGroup, ModelMap model, BindingResult result) {
+        System.out.println(result.hasErrors());
+        if (result.hasErrors()) {
+            model.addAttribute("group",studyGroup);
+            model.addAttribute("content", "createGroup");
+            return "index";
+        }
+
         groupList.add(studyGroup);// this logic is not correct, id has to be populated
         return "redirect:/group/list";
     }
@@ -92,16 +100,17 @@ groupList.add(studyGroup);
     @RequestMapping("/update/{id}")
     public String updateGroup(@PathVariable("id") int id, StudyGroup group,
                               BindingResult result, Model model) {
-    StudyGroup studyGroup;
+        System.out.println(id);
+    StudyGroup studyGroup=new StudyGroup();
         for (StudyGroup groups : groupList) {
-            if (group.getId() == id) {
+            if (groups.getId() == id) {
                 studyGroup = groups;
                 System.out.println(groupList.indexOf(groups));
                 break;
             }
         }
-       /* groupList.get(groupList.indexOf()).setName(group.getName());
-        groupList.get(groupList.indexOf()).setNumber(group.getNumber());*/
+        groupList.get(groupList.indexOf(studyGroup)).setName(group.getName());
+        groupList.get(groupList.indexOf(studyGroup)).setNumber(group.getNumber());
         return "redirect:/group/list";
     }
 

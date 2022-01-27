@@ -1,10 +1,12 @@
 package com.happy.model;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 public class StudyGroup {
     private static int count;
     private int id;
+    @NotBlank(message = "Name is mandatory")
     private String name;
     private int number;
 
