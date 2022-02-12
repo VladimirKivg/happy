@@ -5,10 +5,12 @@ import com.happy.model.GroupP;
 import com.happy.repository.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,11 +28,11 @@ public class GroupController {
         group2.setName("Яслі_2 - Дзвіночок");
         groupList.add(group1);
         groupList.add(group2);
-        /*for (int i = 0; i < 10; i++) {
+         for (int i = 0; i < 10; i++) {
             GroupP groupP = new GroupP();
             groupP.setName("ukjj"+i);
             groupList.add(groupP);
-        }*/
+         }
     }
 
     @Autowired
@@ -47,11 +49,11 @@ public class GroupController {
         model.addAttribute("content", "groupList");
         return "index";
     }
-    private List<Group> getGroupList() {
-        List<Group> groupList = new ArrayList<>();
-        Group group1 = new Group();
-        group1.setRoom("Яслі_1 - Малятко");
-        group1.setId(25);
+    private List<GroupP> getGroupList() {
+        List<GroupP> groupList = new ArrayList<>();
+        GroupP group1 = new GroupP();
+        group1.setName("Яслі_1 - Малятко");
+        group1.setNumber(25);
         groupList.add(group1);
         // add other groups
         return groupList;
@@ -67,17 +69,41 @@ public class GroupController {
         groupList.remove(first.get());// this logic is not correct, id doesn’t depend on index
         return "redirect:/group/list";
     }
-    //редагування групи, доробити
+
     @RequestMapping("/add-group")
     public String addGroup(GroupP group, ModelMap model, BindingResult result) {
+        model.addAttribute("group", group);
         model.addAttribute("content", "createGroup");
         return "index";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String add(GroupP group) {
+    public String add(@Valid GroupP group, BindingResult result, ModelMap model) {
+        if (result.hasErrors()) {
+            model.addAttribute("content", "createGroup");
+
+        }
         groupList.add(group);// this logic is not correct, id has to be populated
         return "redirect:/group/list";
     }
+    //редагування групи за id
+    @RequestMapping("/edit/{id}")
+    public String showUpdateForm(@PathVariable("id") long id, Model model) {
+        GroupP group = groupList.stream().filter(groupP -> groupP.getId() == id).findFirst().get();
+        model.addAttribute("group", group);
+        model.addAttribute("content", "updateGroup");
+        return "index";
+    }
+
+    @RequestMapping("/update/{id}")
+    public String updateGroup(@PathVariable("id") int id, GroupP groupP,
+                              BindingResult result, Model model) {
+        GroupP group = groupList.stream().filter(groupP1 -> groupP1.getId()==id).findFirst().get();
+
+        groupList.get(groupList.indexOf(group)).setName(groupP.getName());
+        groupList.get(groupList.indexOf(group)).setNumber(groupP.getNumber());
+        return "redirect:/group/list";
+    }
+
 
 }

@@ -11,10 +11,19 @@
         <tbody>
         <tr th:each="group : ${groups}">
             <td th:text="${group.name}"></td>
-            <td th:text="${group.id}"></td>
-            <td><a th:href="@{/group/delete/{id}(id=${group.id})}">Редагувати Групу</a></td>
+            <td th:text="${group.number}"></td>
             <td><a th:href="@{/group/delete/{id}(id=${group.id})}">Видалити Групу</a></td>
+            <td>
+                <a th:href="@{/group/edit/{id}(id=${group.id})}">
+                    Редагувати
+                </a>
+            </td>
         </tr>
         </tbody>
     </table>
+    <p>
+        <a href="/group/add-group">
+            Add a new group
+        </a>
+    </p>
 </div>
