@@ -77,7 +77,7 @@ public class GroupController {
         return "redirect:/group/realList";
     }*/
 
-/**додаємо валідацію а так то все як в закоментованому*/
+/**додаємо валідацію а так то все як в закоментованому таккож уважно подывитись в класі GroupStudy що за анотацію там клали а також в createGroup має бути така строчка <span th:if="${#fields.allErrors()}" th:errors="*{name}"></span>*/
     @RequestMapping( value = "/add", method = RequestMethod.POST)
     public String add(@Valid GroupStudy groupStudy,BindingResult  result, ModelMap model) {
 
