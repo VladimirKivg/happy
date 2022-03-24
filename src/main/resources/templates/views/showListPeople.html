@@ -1,0 +1,45 @@
+<div th:fragment="showListPeople" xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <div th:switch="${listPeople}">
+        <h2 th:case="null">No any group.</h2>
+        <div th:case="*">
+
+
+
+            <table>
+                <thead class="red">
+
+                <tr>
+                    <th>Імя</th>
+                    <th>Емаіл</th>
+                    <th>Видалення людини</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="group : ${listPeople}">
+                    <td th:text="${group.name}"></td>
+                    <td th:text="${group.email}"></td>
+            <!--        <td><a th:href="@{/group/delete/{id}(id=${group.id})}">Видалити Групу</a></td>
+-->
+                   <!-- <td>
+                        <a th:href="@{/group/edit/{id}(id=${group.id})}">
+                            Редагувати
+                        </a>
+                    </td>-->
+
+                </tr>
+
+
+
+                </tbody>
+            </table>
+
+            <!--<p>
+                <a href="/group/addGroups"> Add a new group
+                </a>
+            </p>-->
+
+        </div>
+    </div>
+
+</div>
