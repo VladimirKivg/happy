@@ -15,7 +15,7 @@ import java.util.Locale;
 
 @Controller
 @RequestMapping(value = "/group")
-public class GroupController {
+public class GroupController  {
 
     @Autowired
     GroupRepository groupRepository;
